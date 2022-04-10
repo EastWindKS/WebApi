@@ -43,7 +43,7 @@ namespace WebAPI.Services.JWT
             return new JwtTokenModel
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                Valid = jwtSecurityToken.ValidTo,
+                Valid = ((DateTimeOffset) jwtSecurityToken.ValidTo).ToUnixTimeSeconds().ToString(),
                 UserName = userName
             };
         }

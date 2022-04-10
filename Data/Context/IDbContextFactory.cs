@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Data.Context;
 
-public interface IDbContextFactory<out T>
+public interface IDbContextFactory
 {
-    T CreateContext();
+    MainDbContext CreateDbContext();
 }

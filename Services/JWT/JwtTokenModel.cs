@@ -4,7 +4,7 @@
     {
         public string Token { get; set; }
     
-        public DateTime Valid { get; set; }
+        public string Valid { get; set; }
     
         public string UserName { get; set; }
     }

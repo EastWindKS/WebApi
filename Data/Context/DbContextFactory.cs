@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Data.Context;
 
-public class DbContextFactory : IDbContextFactory<MainDbContext>
+public class DbContextFactory : IDbContextFactory
 {
     public DbContextFactory(IConfiguration configuration, IPrincipal principal)
     {
@@ -15,7 +15,7 @@ public class DbContextFactory : IDbContextFactory<MainDbContext>
 
     private readonly IPrincipal _principal;
 
-    public MainDbContext CreateContext()
+    public MainDbContext CreateDbContext()
     {
         var userName = _principal.Identity?.Name;
         var originalConnectionString = _configuration.GetConnectionString("UserSpecificConnection");
