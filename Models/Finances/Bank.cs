@@ -10,10 +10,6 @@ public class Bank
     public string Name { get; set; } = null!;
 
     public string CorrespondentAccount { get; set; }
-
-    public string SwiftCode { get; set; }
-
-    public string NationalCode { get; set; }
-
+    
     public int OrganizationId { get; set; }
 }

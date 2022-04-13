@@ -4,7 +4,7 @@ namespace WebAPI.Data.Interfaces.Systems;
 
 public interface IModelRepository<T> where T : class
 {
-    Task<IEnumerable<T>> GetAllAsync();
+    Task<IEnumerable<T>> GetAllAsync(string property = default);
 
     Task<T> GetAsync(int id, string property = default);
 

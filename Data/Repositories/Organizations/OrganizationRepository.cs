@@ -10,8 +10,18 @@ public class OrganizationRepository : ModelRepository<Organization>, IOrganizati
     {
     }
 
+    private static string ViewProperty => @"
+            Country,
+            OrganizationOwners.Employee.EmployeePassports,
+            OrganizationOwners.Employee.OrganizationEmployee.Organization";
+
     private static string Property => @"
-        Country, 
-        OrganizationLegalForm, 
-        ChildOrganizations";
+            Country, 
+            OrganizationLegalForm, 
+            ChildOrganizations";
+
+    public override Task<IEnumerable<Organization>> GetAllAsync(string property = default)
+    {
+        return base.GetAllAsync(ViewProperty);
+    }
 }

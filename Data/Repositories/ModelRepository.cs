@@ -24,9 +24,14 @@ public class ModelRepository<T> : IModelRepository<T> where T : class, IContainI
 
     protected IDbContextFactory Factory { get; }
 
-    public async Task<IEnumerable<T>> GetAllAsync()
+    public virtual async Task<IEnumerable<T>> GetAllAsync(string property = default)
     {
-        return await DbSet.Includes(_property).AsNoTracking().ToListAsync();
+        if (string.IsNullOrEmpty(property))
+        {
+            property = _property;
+        }
+        
+        return await DbSet.Includes(property).AsNoTracking().ToListAsync();
     }
 
     public virtual async Task<T> GetAsync(int id, string property = default)

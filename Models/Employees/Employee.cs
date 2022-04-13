@@ -25,4 +25,15 @@ public class Employee
     public Address Address { get; set; }
 
     public EmployeeInsurance EmployeeInsurance { get; set; }
+
+    public ICollection<EmployeePassport> EmployeePassports { get; set; } = new HashSet<EmployeePassport>();
+
+    public ICollection<OrganizationEmployee> OrganizationEmployee { get; set; } = new HashSet<OrganizationEmployee>();
+
+    public string GetShortName()
+    {
+        var firstPassport = EmployeePassports.FirstOrDefault();
+
+        return firstPassport is null ? string.Empty : $"{firstPassport.Surname.Trim()} {firstPassport.FirstName.Trim()[0]}.{firstPassport.SecondName.Trim()[0]}.";
+    }
 }

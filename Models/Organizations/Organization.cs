@@ -27,7 +27,7 @@ public class Organization : IContainId
     public bool IsLead { get; set; }
 
     public int? OrganizationLegalFormId { get; set; }
-    
+
     public int? ParentOrganizationId { get; set; }
 
     [ForeignKey("CountryId")]
@@ -40,6 +40,8 @@ public class Organization : IContainId
     public Organization ParentOrganization { get; set; }
 
     public ICollection<OrganizationBankAccount> OrganizationBankAccounts { get; set; } = new HashSet<OrganizationBankAccount>();
+
+    public ICollection<OrganizationOwner> OrganizationOwners { get; set; } = new HashSet<OrganizationOwner>();
 
     public ICollection<Organization> ChildOrganizations { get; set; } = new HashSet<Organization>();
 }

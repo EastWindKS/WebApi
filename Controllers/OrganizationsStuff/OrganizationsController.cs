@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using WebAPI.Data.Interfaces.Organizations;
+using WebAPI.Data.Repositories.Organizations;
 using WebAPI.Dtos.Organizations;
 using WebAPI.Models.Organizations;
 
@@ -16,13 +16,10 @@ public class OrganizationsController : ControllerBase
 
     private readonly IMapper _mapper;
 
-    private readonly IMemoryCache _memoryCache;
-
-    public OrganizationsController(IOrganizationRepository organizationsRepository, IMapper mapper, IMemoryCache memoryCache)
+    public OrganizationsController(IOrganizationRepository organizationsRepository, IMapper mapper)
     {
         _organizationsRepository = organizationsRepository;
         _mapper = mapper;
-        _memoryCache = memoryCache;
     }
 
     [HttpGet]
@@ -49,19 +46,8 @@ public class OrganizationsController : ControllerBase
     {
         try
         {
-            if (_memoryCache.TryGetValue("organizations", out IEnumerable<Organization> organizations))
-            {
-                return Ok(_mapper.Map<IEnumerable<OrganizationDto>>(organizations));
-            }
-
-            organizations = await _organizationsRepository.GetAllAsync();
-
-            if (!organizations.Any())
-            {
-                _memoryCache.Set("organizations", organizations, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
-            }
-
-            return Ok(_mapper.Map<IEnumerable<OrganizationDto>>(organizations));
+            var organizations = await _organizationsRepository.GetAllAsync();
+            return Ok(_mapper.Map<IEnumerable<OrganizationListView>>(organizations));
         }
         catch (Exception e)
         {

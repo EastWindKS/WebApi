@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebAPI.Models.Addresses;
+using WebAPI.Models.Employees;
 using WebAPI.Models.Finances;
 using WebAPI.Models.Organizations;
 
@@ -17,6 +18,10 @@ public class MainDbContext : DbContext
     public DbSet<Currency> Currencies { get; set; }
     public DbSet<Bank> Banks { get; set; }
     public DbSet<OrganizationBankAccount> OrganizationBankAccounts { get; set; }
+    public DbSet<EmployeePassport> EmployeePassports { get; set; }
+    public DbSet<Office> Offices { get; set; }
+    public DbSet<OrganizationOwner> OrganizationOwners { get; set; }
+    public DbSet<OrganizationEmployee> OrganizationEmployees { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -24,5 +29,10 @@ public class MainDbContext : DbContext
             .HasMany(e => e.ChildOrganizations)
             .WithOne(e => e.ParentOrganization)
             .HasForeignKey(e => e.ParentOrganizationId);
+        
+        // modelBuilder.Entity<Organization>()
+        //     .HasMany(e => e.OrganizationOwners)
+        //     .WithOne(e => e.Organization)
+        //     .HasForeignKey(e => e.OrganizationId);
     }
 }

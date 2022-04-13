@@ -19,8 +19,6 @@ public class Currency
 
     public string MonetaryUnit { get; set; } = null!;
 
-    public byte? Tail { get; set; }
-
     public bool IsAccountingCurrency { get; set; }
 
     public int? DefaultInCountryId { get; set; }

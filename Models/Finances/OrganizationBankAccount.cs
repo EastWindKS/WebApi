@@ -10,7 +10,7 @@ public class OrganizationBankAccount
 
     public int OrganizationId { get; set; }
 
-    public int BankId { get; set; }
+    public int? BankId { get; set; }
 
     public int CurrencyId { get; set; }
 

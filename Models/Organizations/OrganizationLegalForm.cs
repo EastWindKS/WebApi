@@ -9,9 +9,7 @@ public class OrganizationLegalForm
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
-
-    public string Explanation { get; set; }
-
+    
     public int? CountryId { get; set; }
 
     [ForeignKey("CountryId")]
