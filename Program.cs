@@ -6,8 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Data.Context;
 using WebAPI.Data.Interfaces.Organizations;
+using WebAPI.Data.Interfaces.Services;
 using WebAPI.Data.Repositories.Identity;
 using WebAPI.Data.Repositories.Organizations;
+using WebAPI.Data.Repositories.Services;
 using WebAPI.Models.Authenticate;
 using WebAPI.Security.Authenticate;
 using WebAPI.Services.JWT;
@@ -64,6 +66,7 @@ builder.Services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpC
 
 builder.Services.AddScoped<IAuthenticate, Authenticate>();
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+builder.Services.AddScoped<IFilterListRepository, FilterListRepository>();
 
 builder.Services.AddSingleton<IJwtWorker, JwtWorker>();
 builder.Services.AddSingleton<INovellWorker, NovellWorker>();

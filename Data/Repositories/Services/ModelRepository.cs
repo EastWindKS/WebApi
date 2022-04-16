@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Data.Context;
 using WebAPI.Data.Interfaces.Systems;
-using Microsoft.EntityFrameworkCore;
 using WebAPI.Infrastructure;
 
-namespace WebAPI.Data.Repositories;
+namespace WebAPI.Data.Repositories.Services;
 
 public class ModelRepository<T> : IModelRepository<T> where T : class, IContainId
 {
@@ -30,7 +30,7 @@ public class ModelRepository<T> : IModelRepository<T> where T : class, IContainI
         {
             property = _property;
         }
-        
+
         return await DbSet.Includes(property).AsNoTracking().ToListAsync();
     }
 
@@ -44,8 +44,13 @@ public class ModelRepository<T> : IModelRepository<T> where T : class, IContainI
         return await DbSet.Includes(property).AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
     }
 
-    public virtual IEnumerable<T> GetAsync(Expression<Func<T, bool>> predicate, string property)
+    public virtual IEnumerable<T> GetAsync(Expression<Func<T, bool>> predicate, string property = default)
     {
+        if (string.IsNullOrEmpty(property))
+        {
+            property = _property;
+        }
+        
         return DbSet.Where(predicate).Includes(property).AsNoTracking();
     }
 

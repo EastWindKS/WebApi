@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Data.Interfaces.Organizations;
-using WebAPI.Data.Repositories.Organizations;
 using WebAPI.Dtos.Organizations;
 using WebAPI.Models.Organizations;
 

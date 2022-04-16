@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebAPI.Models.Addresses;
 using WebAPI.Models.Employees;
+using WebAPI.Models.Filters;
 using WebAPI.Models.Finances;
 using WebAPI.Models.Organizations;
+using WebAPI.Models.UserRights;
+using SearchOption = WebAPI.Models.Filters.SearchOption;
 
 namespace WebAPI.Data.Context;
 
@@ -22,6 +25,11 @@ public class MainDbContext : DbContext
     public DbSet<Office> Offices { get; set; }
     public DbSet<OrganizationOwner> OrganizationOwners { get; set; }
     public DbSet<OrganizationEmployee> OrganizationEmployees { get; set; }
+    public DbSet<FilterList> FilterLists { get; set; }
+    public DbSet<PropertyDataType> PropertyDataTypes { get; set; }
+    public DbSet<SearchOption> SearchOptions { get; set; }
+    public DbSet<SearchOptionPropertyDataTypeLink> SearchOptionPropertyDataTypeLinks { get; set; }
+    public DbSet<RightController> RightControllers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,10 +37,5 @@ public class MainDbContext : DbContext
             .HasMany(e => e.ChildOrganizations)
             .WithOne(e => e.ParentOrganization)
             .HasForeignKey(e => e.ParentOrganizationId);
-        
-        // modelBuilder.Entity<Organization>()
-        //     .HasMany(e => e.OrganizationOwners)
-        //     .WithOne(e => e.Organization)
-        //     .HasForeignKey(e => e.OrganizationId);
     }
 }

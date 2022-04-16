@@ -1,5 +1,6 @@
 ﻿using WebAPI.Data.Context;
 using WebAPI.Data.Interfaces.Organizations;
+using WebAPI.Data.Repositories.Services;
 using WebAPI.Models.Organizations;
 
 namespace WebAPI.Data.Repositories.Organizations;
