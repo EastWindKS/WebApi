@@ -8,5 +8,5 @@ public class OrganizationLegalFormDto
 
     public string Explanation { get; set; }
 
-    public int CountryId { get; set; }
+    public int? CountryId { get; set; }
 }

@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Data.Context;
+using WebAPI.Data.Interfaces.Finances;
 using WebAPI.Data.Interfaces.Organizations;
 using WebAPI.Data.Interfaces.Services;
+using WebAPI.Data.Repositories.Finances;
 using WebAPI.Data.Repositories.Identity;
 using WebAPI.Data.Repositories.Organizations;
 using WebAPI.Data.Repositories.Services;
@@ -67,6 +69,8 @@ builder.Services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpC
 builder.Services.AddScoped<IAuthenticate, Authenticate>();
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<IFilterListRepository, FilterListRepository>();
+builder.Services.AddScoped<ICurrencyRepository, CurrencyRepository>();
+builder.Services.AddScoped<IOrganizationLegalFormRepository, OrganizationLegalFormRepository>();
 
 builder.Services.AddSingleton<IJwtWorker, JwtWorker>();
 builder.Services.AddSingleton<INovellWorker, NovellWorker>();
