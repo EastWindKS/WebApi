@@ -16,6 +16,7 @@ using WebAPI.Data.Repositories.Organizations;
 using WebAPI.Data.Repositories.Services;
 using WebAPI.Models.Authenticate;
 using WebAPI.Security.Authenticate;
+using WebAPI.Services;
 using WebAPI.Services.JWT;
 using WebAPI.Services.Novell;
 
@@ -79,10 +80,12 @@ builder.Services.AddSingleton<IJwtWorker, JwtWorker>();
 builder.Services.AddSingleton<INovellWorker, NovellWorker>();
 builder.Services.AddSingleton<IIdentityRepository, IdentityRepository>();
 builder.Services.AddSingleton<IDbContextFactory, DbContextFactory>();
+builder.Services.AddSingleton<ITestService, TestService>();
 
 #endregion
 
 var app = builder.Build();
+app.Services.GetService<ITestService>()?.Call();
 
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
